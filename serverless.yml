@@ -3,7 +3,7 @@ service: sat-api
 provider:
   name: aws
 
-  runtime: nodejs6.10
+  runtime: nodejs12.x
 
   stage: ${opt:stage, 'production'}
 
