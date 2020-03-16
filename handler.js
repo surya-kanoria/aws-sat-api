@@ -2,6 +2,8 @@
 
 const logger = require('fastlog')('sat-api');
 const utils = require('./utils.js');
+const fs = require('fs');
+const html = fs.readFileSync("index.html");
 
 /**
  * landsat handler function.
@@ -80,4 +82,18 @@ module.exports.sentinel = (event, context, callback) => {
       logger.error(err);
       return callback(new Error('API Error'));
     });
+};
+
+module.exports.home = (event, context, callback) => {
+  logger.info('Received event: ' + JSON.stringify(event));
+
+  const response = {
+    statusCode: 200,
+    headers: {
+      'Content-Type': 'text/html',
+    },
+    body: html,
+  };
+  // callback will send HTML back
+  callback(null, response);
 };
