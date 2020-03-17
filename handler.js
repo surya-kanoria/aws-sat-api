@@ -73,7 +73,7 @@ module.exports.sentinel = (event, context, callback) => {
   // if (event.utm === '') return callback(new Error('UTM param missing!'));
   // if (event.lat === '') return callback(new Error('LAT param missing!'));
   // if (event.grid === '') return callback(new Error('GRID param missing!'));
-  fn = converter('latlong', 'mgrs'),
+  fn = coordinator('latlong', 'mgrs'),
   mgrs = fn(event.lat, event.long, 4);
   callback(null,mgrs);
   utils.get_sentinel(event.utm, event.lat, event.grid, event.full)
