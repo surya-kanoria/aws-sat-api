@@ -4,6 +4,8 @@ const logger = require('fastlog')('sat-api');
 const utils = require('./utils.js');
 const fs = require('fs');
 const html = fs.readFileSync("index.html");
+const coordinator = require('coordinator');
+
 
 /**
  * landsat handler function.
@@ -66,10 +68,14 @@ module.exports.cbers = (event, context, callback) => {
 module.exports.sentinel = (event, context, callback) => {
   logger.info('Received event: ' + JSON.stringify(event));
 
-  if (event.utm === '') return callback(new Error('UTM param missing!'));
-  if (event.lat === '') return callback(new Error('LAT param missing!'));
-  if (event.grid === '') return callback(new Error('GRID param missing!'));
-
+  if(event.lat === '') return callback(new Error('Latitude missing!'));
+  if(event.long === '') return callback(new Error('Longitude missing'));
+  // if (event.utm === '') return callback(new Error('UTM param missing!'));
+  // if (event.lat === '') return callback(new Error('LAT param missing!'));
+  // if (event.grid === '') return callback(new Error('GRID param missing!'));
+  fn = converter('latlong', 'mgrs'),
+  mgrs = fn(event.lat, event.long, 4);
+  console.log(mgrs);
   utils.get_sentinel(event.utm, event.lat, event.grid, event.full)
     .then(data => {
       return callback(null, {
@@ -92,8 +98,9 @@ module.exports.home = (event, context, callback) => {
     headers: {
       'Content-Type': 'text/html',
     },
-    body: html,
+    body: "<p>Hello World</p>",
   };
+  const body = '<p>Hello World</p>';
   // callback will send HTML back
-  callback(null, response);
+  context.succeed(body);
 };

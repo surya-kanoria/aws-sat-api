@@ -70,11 +70,12 @@ functions:
     memorySize: 512
     timeout: 10
     events:
-      - http:
+        http:
           integration: lambda
           path: home
           method: get
           cors: true
-          request:
-            template:
-              application/json: '{  }'
+          response:
+              headers:
+                      Content-Type: "'text/html'"
+              template: $input.path('$')
