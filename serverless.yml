@@ -70,7 +70,7 @@ functions:
     memorySize: 512
     timeout: 10
     events:
-        http:
+      - http:
           integration: lambda
           path: home
           method: get

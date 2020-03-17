@@ -75,7 +75,7 @@ module.exports.sentinel = (event, context, callback) => {
   // if (event.grid === '') return callback(new Error('GRID param missing!'));
   fn = converter('latlong', 'mgrs'),
   mgrs = fn(event.lat, event.long, 4);
-  console.log(mgrs);
+  callback(null,mgrs);
   utils.get_sentinel(event.utm, event.lat, event.grid, event.full)
     .then(data => {
       return callback(null, {
