@@ -32,5 +32,6 @@
     "test": "nyc tape test/*.test.js"
   },
   "author": "Vincent Sarago for RemotePixel",
-  "license": "BDS-3"
+  "license": "BDS-3",
+  "type":"module"
 }
