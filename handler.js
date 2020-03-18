@@ -4,7 +4,7 @@ const logger = require('fastlog')('sat-api');
 const utils = require('./utils.js');
 const fs = require('fs');
 const html = fs.readFileSync("index.html","utf-8");
-const coordinates_page = fs.readFileSync("coordinates.html.html","utf-8");
+const coordinates_page = fs.readFileSync("coordinates.html","utf-8");
 
 
 /**

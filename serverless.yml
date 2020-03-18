@@ -94,3 +94,6 @@ functions:
               headers:
                       Content-Type: "'text/html'"
               template: $input.path('$')
+          request:
+            template:
+              application/json: '{ "satellite" : "$input.params(''satellite'')"}'
