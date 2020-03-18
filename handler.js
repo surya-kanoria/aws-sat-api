@@ -56,11 +56,20 @@ module.exports.cbers = (event, context, callback) => {
 
   utils.get_cbers(event.path, event.row)
     .then(data => {
-      return callback(null, {
-        request: { path: event.path, row: event.row },
-        meta: { found: data.length },
-        results: data
+      var image_list = data.map(row => {
+        return `<p>${row.acquisition_date}</p>
+                <img src="${row.browseURL}"/>`
       });
+      var template = `
+          <!DOCTYPE html>
+            <div>
+              <h1>
+                Welcome to satellite imagery
+              </h1>
+              <p> Please find your results for row: ${event.row} and path: ${event.path} </p>
+              ${image_list}
+            </div>`;
+      return context.succeed(template);
     })
     .catch(err => {
       logger.error(err);

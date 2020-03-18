@@ -53,6 +53,10 @@ functions:
           request:
             template:
               application/json: '{ "path" : "$input.params(''path'')", "row" : "$input.params(''row'')" }'
+          response:
+              headers:
+                      Content-Type: "'text/html'"
+              template: $input.path('$')
 
 
   sentinel:
