@@ -207,7 +207,7 @@ const get_cbers = (path, row) => {
 const get_sentinel = (utm, lat, grid, full=false) => {
   const s3 = new AWS.S3({region: 'eu-central-1'});
   const sentinel_bucket = 'sentinel-s2-l1c';
-  const img_year = utils.generate_year_range(2015, moment().year());
+  const img_year = utils.generate_year_range(2018, moment().year());
 
   utm = utm.replace(/^0/, '');
 
