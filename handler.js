@@ -104,7 +104,6 @@ module.exports.coordinates = (event, context, callback) => {
   } else {
     body = cbers_entry;
   }
-  const body = coordinates_page;
   // const body = '<p>Hello World</p>';
   // callback will send HTML back
   context.succeed(body);
