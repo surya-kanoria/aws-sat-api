@@ -35,6 +35,10 @@ functions:
           request:
             template:
               application/json: '{ "path" : "$input.params(''path'')", "row" : "$input.params(''row'')", "full" : "$input.params(''full'')" }'
+          response:
+              headers:
+                      Content-Type: "'text/html'"
+              template: $input.path('$')
 
   cbers:
     handler: handler.cbers

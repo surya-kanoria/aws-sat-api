@@ -7,6 +7,7 @@ const html = fs.readFileSync("index.html","utf-8");
 const sentinel_entry = fs.readFileSync("sentinel-entry.html","utf-8");
 const landsat_entry = fs.readFileSync("landsat-entry.html","utf-8");
 const cbers_entry = fs.readFileSync("cbers-entry.html","utf-8");
+const landsat_results = fs.readFileSync("landsat-results.html","utf-8");
 
 
 /**
@@ -25,11 +26,20 @@ module.exports.landsat = (event, context, callback) => {
 
   utils.get_landsat(event.path, event.row, event.full)
     .then(data => {
-      return callback(null, {
-        request: { path: event.path, row: event.row },
-        meta: { found: data.length },
-        results: data
+      image_list = data.map(row => {
+        return `<p>${row.acquisition_date}</p>
+                <img src="${row.browseURL}/>`
       });
+      var template = `
+          <!DOCTYPE html>
+            <div>
+              <h1>
+                Welcome to satellite imagery
+              </h1>
+              <p> Please find your results for coordinates: ${event.row} and ${event.path} </p>
+              ${image_list}
+            </div>`;
+      return context.succeed(template);
     })
     .catch(err => {
       logger.error(err);
