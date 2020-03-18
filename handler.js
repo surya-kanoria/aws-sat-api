@@ -4,9 +4,6 @@ const logger = require('fastlog')('sat-api');
 const utils = require('./utils.js');
 const fs = require('fs');
 const html = fs.readFileSync("index.html");
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from "./aws-sat/src/App";
 
 
 /**
@@ -96,7 +93,7 @@ module.exports.home = (event, context, callback) => {
     },
     body: "<p>Hello World</p>",
   };
-  const body = ReactDOM.renderToString(<App/>)
+  const body = html;
   // const body = '<p>Hello World</p>';
   // callback will send HTML back
   context.succeed(body);
