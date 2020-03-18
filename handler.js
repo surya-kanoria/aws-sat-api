@@ -3,6 +3,7 @@
 const logger = require('fastlog')('sat-api');
 const utils = require('./utils.js');
 const fs = require('fs');
+const html = fs.readFileSync("index.html","utf-8");
 const sentinel_entry = fs.readFileSync("sentinel-entry.html","utf-8");
 const landsat_entry = fs.readFileSync("landsat-entry.html","utf-8");
 const cbers_entry = fs.readFileSync("cbers-entry.html","utf-8");
