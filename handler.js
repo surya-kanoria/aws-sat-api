@@ -3,7 +3,6 @@
 const logger = require('fastlog')('sat-api');
 const utils = require('./utils.js');
 const fs = require('fs');
-const html = fs.readFileSync("index.html","utf-8");
 const sentinel_entry = fs.readFileSync("sentinel-entry.html","utf-8");
 const landsat_entry = fs.readFileSync("landsat-entry.html","utf-8");
 const cbers_entry = fs.readFileSync("cbers-entry.html","utf-8");
@@ -28,7 +27,7 @@ module.exports.landsat = (event, context, callback) => {
     .then(data => {
       var image_list = data.map(row => {
         return `<p>${row.acquisition_date}</p>
-                <img src="${row.browseURL}/>`
+                <img src="${row.browseURL}"/>`
       });
       var template = `
           <!DOCTYPE html>
@@ -36,7 +35,7 @@ module.exports.landsat = (event, context, callback) => {
               <h1>
                 Welcome to satellite imagery
               </h1>
-              <p> Please find your results for coordinates: ${event.row} and ${event.path} </p>
+              <p> Please find your results for row: ${event.row} and path: ${event.path} </p>
               ${image_list}
             </div>`;
       return context.succeed(template);
