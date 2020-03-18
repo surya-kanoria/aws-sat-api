@@ -26,7 +26,7 @@ module.exports.landsat = (event, context, callback) => {
 
   utils.get_landsat(event.path, event.row, event.full)
     .then(data => {
-      image_list = data.map(row => {
+      var image_list = data.map(row => {
         return `<p>${row.acquisition_date}</p>
                 <img src="${row.browseURL}/>`
       });
@@ -43,7 +43,7 @@ module.exports.landsat = (event, context, callback) => {
     })
     .catch(err => {
       logger.error(err);
-      return callback(new Error('API Error'));
+      return callback(err);
     });
 };
 
