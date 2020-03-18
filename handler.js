@@ -3,7 +3,8 @@
 const logger = require('fastlog')('sat-api');
 const utils = require('./utils.js');
 const fs = require('fs');
-const html = fs.readFileSync("index.html");
+const html = fs.readFileSync("index.html","utf-8");
+const coordinates_page = fs.readFileSync("coordinates.html.html","utf-8");
 
 
 /**
@@ -85,15 +86,15 @@ module.exports.sentinel = (event, context, callback) => {
 
 module.exports.home = (event, context, callback) => {
   logger.info('Received event: ' + JSON.stringify(event));
-
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'text/html',
-    },
-    body: "<p>Hello World</p>",
-  };
   const body = html;
+  // const body = '<p>Hello World</p>';
+  // callback will send HTML back
+  context.succeed(body);
+};
+
+module.exports.coordinates = (event, context, callback) => {
+  logger.info('Received event: ' + JSON.stringify(event));
+  const body = coordinates_page;
   // const body = '<p>Hello World</p>';
   // callback will send HTML back
   context.succeed(body);

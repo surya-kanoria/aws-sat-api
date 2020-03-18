@@ -1,4 +1,15 @@
 <!DOCTYPE html>
 <div>
-    Hello World
+    <h1>
+        Welcome to satellite imagery
+    </h1>
+    <form action="/coordinates" method="get">
+        <input type="radio" id="landsat" name="satellite" value="landsat">
+        <label for="male">LandSat</label><br>
+        <input type="radio" id="sentinel" name="satellite" value="sentinel">
+        <label for="female">Satellite</label><br>
+        <input type="radio" id="cbers" name="satellite" value="cbers">
+        <label for="other">Cbers</label>
+        <input type="submit" value="Submit">
+      </form>
 </div>

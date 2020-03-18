@@ -79,3 +79,18 @@ functions:
               headers:
                       Content-Type: "'text/html'"
               template: $input.path('$')
+
+  coordinates:
+    handler: handler.coordinates
+    memorySize: 512
+    timeout: 10
+    events:
+      - http:
+          integration: lambda
+          path: coordinates
+          method: get
+          cors: true
+          response:
+              headers:
+                      Content-Type: "'text/html'"
+              template: $input.path('$')
