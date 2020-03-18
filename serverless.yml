@@ -63,7 +63,7 @@ functions:
           cors: true
           request:
             template:
-              application/json: '{ "lat" : "$input.params(''lat'')", "long" : "$input.params(''long'')"}'
+              application/json: '{ "utm" : "$input.params(''utm'')", "grid" : "$input.params(''grid'')", "lat" : "$input.params(''lat'')", "full" : "$input.params(''full'')" }'
 
   home:
     handler: handler.home
